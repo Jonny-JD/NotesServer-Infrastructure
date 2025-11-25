@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: jimmy7/notes-frontend:${GITHUB_SHA}
+        image: ${IMAGE}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
