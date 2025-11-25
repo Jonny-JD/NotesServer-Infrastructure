@@ -9,13 +9,13 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy backend
-        if: github.event.client_payload.service == 'backend'
+        if: github.event.client_payload.service == 'deploy-backend-prod'
         run: |
           export IMAGE="${{ github.event.client_payload.image }}"
           envsubst < k8s/prod/deployments/backend_deployment.yaml | kubectl apply -f -
 
       - name: Deploy frontend
-        if: github.event.client_payload.service == 'frontend'
+        if: github.event.client_payload.service == 'deploy-frontend-prod'
         run: |
           export IMAGE="${{ github.event.client_payload.image }}"
           envsubst < k8s/prod/deployments/frontend_deployment.yaml | kubectl apply -f -
