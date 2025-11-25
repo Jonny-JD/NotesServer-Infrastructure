@@ -1,0 +1,21 @@
+on:
+  repository_dispatch:
+    types: [deploy-backend-prod, deploy-frontend-prod]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy backend
+        if: github.event.client_payload.service == 'backend'
+        run: |
+          export IMAGE="${{ github.event.client_payload.image }}"
+          envsubst < k8s/prod/deployments/backend_deployment.yaml | kubectl apply -f -
+
+      - name: Deploy frontend
+        if: github.event.client_payload.service == 'frontend'
+        run: |
+          export IMAGE="${{ github.event.client_payload.image }}"
+          envsubst < k8s/prod/deployments/frontend_deployment.yaml | kubectl apply -f -
