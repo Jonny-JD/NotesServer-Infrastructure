@@ -8,6 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+
+      - name: Kube config
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+
       - name: Deploy backend
         if: github.event.action == 'deploy-backend-prod'
         run: |
