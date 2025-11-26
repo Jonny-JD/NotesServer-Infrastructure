@@ -5,6 +5,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
       - uses: actions/checkout@v4
 
@@ -13,24 +14,20 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           echo "PWD=$(pwd)"
           ls -la
-          
+
       - name: Kube config
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
-
       - name: Deploy backend via Helm
         if: github.event.action == 'deploy-backend-prod'
         run: |
           cd "$GITHUB_WORKSPACE"
-          export IMAGE="${{ github.event.client_payload.image }}"
-          echo "IMAGE=${IMAGE}"
+          IMAGE="${{ github.event.client_payload.image }}"
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
-            --set image.full="${IMAGE}" \
-            --force
-            
+            --set image.full="${IMAGE}"
 
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-prod'
@@ -38,10 +35,7 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          echo "REPO=${IMAGE_REPO}"
-          echo "TAG=${IMAGE_TAG}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
             --set image.repository="${IMAGE_REPO}" \
             --set image.tag="${IMAGE_TAG}"
-
