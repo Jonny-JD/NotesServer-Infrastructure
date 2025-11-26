@@ -8,6 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Go to repo root
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          echo "PWD=$(pwd)"
+          ls -la
+          
       - name: Kube config
         run: |
           mkdir -p ~/.kube
@@ -17,6 +23,7 @@ jobs:
       - name: Deploy backend via Helm
         if: github.event.action == 'deploy-backend-prod'
         run: |
+          cd "$GITHUB_WORKSPACE"
           export IMAGE="${{ github.event.client_payload.image }}"
           echo "IMAGE=${IMAGE}"
           helm upgrade --install backend ./k8s/helm/backend \
@@ -28,6 +35,7 @@ jobs:
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-prod'
         run: |
+          cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           echo "REPO=${IMAGE_REPO}"
