@@ -26,7 +26,7 @@ jobs:
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-prod'
         run: |
-          IMAGE="${{ github.event.client_payload.image }}"
+          export IMAGE="${{ github.event.client_payload.image }}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
             --set image.tag="${IMAGE}"
