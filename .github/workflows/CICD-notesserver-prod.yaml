@@ -7,6 +7,10 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Install Helm
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
 
       - name: Kube config
@@ -15,15 +19,20 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
 
-      - name: Deploy backend
-        if: github.event.action == 'deploy-backend-prod'
+      - name: Deploy backend via Helm
+        if: github.event.client_payload.service == 'deploy-backend-prod'
         run: |
           export IMAGE="${{ github.event.client_payload.image }}"
-          envsubst < k8s/prod/deployments/backend_deployment.yaml | kubectl apply -f -
+          helm upgrade --install backend ./k8s/helm/backend \
+            --namespace prod \
+            --set image.tag="${IMAGE}"
+            
 
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-prod'
         run: |
-          export IMAGE="${{ github.event.client_payload.image }}"
-          envsubst < k8s/prod/deployments/frontend_deployment.yaml | kubectl apply -f -
+          IMAGE="${{ github.event.client_payload.image }}"
+          helm upgrade --install frontend ./charts/frontend \
+            --namespace prod \
+            --set image.tag="${IMAGE}"
 
