@@ -24,10 +24,12 @@ jobs:
         if: github.event.action == 'deploy-backend-prod'
         run: |
           cd "$GITHUB_WORKSPACE"
-          IMAGE="${{ github.event.client_payload.image }}"
-          helm upgrade --install backend ./k8s/helm/backend \
+          IMAGE_REPO="${{ github.event.client_payload.repository }}"
+          IMAGE_TAG="${{ github.event.client_payload.tag }}"
+          helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
-            --set image.full="${IMAGE}"
+            --set image.repository="${IMAGE_REPO}" \
+            --set image.tag="${IMAGE_TAG}"
 
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-prod'
