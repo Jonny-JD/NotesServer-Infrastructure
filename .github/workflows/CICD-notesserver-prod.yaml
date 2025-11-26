@@ -22,6 +22,7 @@ jobs:
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
             --set image.full="${IMAGE}"
+            --force
             
 
       - name: Deploy frontend
@@ -32,4 +33,5 @@ jobs:
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
             --set image.full="${IMAGE}"
+            --force
 
