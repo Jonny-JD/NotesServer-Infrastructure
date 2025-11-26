@@ -21,7 +21,7 @@ jobs:
           echo "IMAGE=${IMAGE}"
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
-            --set image.tag="${IMAGE}"
+            --set image.full="${IMAGE}"
             
 
       - name: Deploy frontend
@@ -31,5 +31,5 @@ jobs:
           echo "IMAGE=${IMAGE}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
-            --set image.tag="${IMAGE}"
+            --set image.full="${IMAGE}"
 
