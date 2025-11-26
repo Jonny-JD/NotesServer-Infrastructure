@@ -18,6 +18,7 @@ jobs:
         if: github.event.action == 'deploy-backend-prod'
         run: |
           export IMAGE="${{ github.event.client_payload.image }}"
+          echo "IMAGE=${IMAGE}"
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
             --set image.tag="${IMAGE}"
@@ -27,6 +28,7 @@ jobs:
         if: github.event.action == 'deploy-frontend-prod'
         run: |
           export IMAGE="${{ github.event.client_payload.image }}"
+          echo "IMAGE=${IMAGE}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
             --set image.tag="${IMAGE}"
