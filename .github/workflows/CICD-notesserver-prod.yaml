@@ -21,7 +21,7 @@ jobs:
           echo "IMAGE=${IMAGE}"
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
-            --set image.full="${IMAGE}"
+            --set image.full="${IMAGE}" \
             --force
             
 
@@ -32,6 +32,6 @@ jobs:
           echo "IMAGE=${IMAGE}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
-            --set image.full="${IMAGE}"
+            --set image.full="${IMAGE}" \
             --force
 
