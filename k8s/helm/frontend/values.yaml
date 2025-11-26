@@ -6,5 +6,5 @@ image:
 replicaCount: 2
 
 service:
-
   port: 80
+
