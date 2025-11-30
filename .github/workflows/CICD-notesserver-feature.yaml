@@ -1,0 +1,43 @@
+on:
+  repository_dispatch:
+    types: [deploy-backend-feature, deploy-frontend-feature]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Go to repo root
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          echo "PWD=$(pwd)"
+          ls -la
+
+      - name: Kube config
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+
+      - name: Deploy backend via Helm
+        if: github.event.action == 'deploy-backend-feature'
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          IMAGE_REPO="${{ github.event.client_payload.repository }}"
+          IMAGE_TAG="${{ github.event.client_payload.tag }}"
+          helm upgrade --install backend ./k8s/helm/feature/backend \
+            --namespace feature \
+            --set image.repository="${IMAGE_REPO}" \
+            --set image.tag="${IMAGE_TAG}"
+
+      - name: Deploy frontend
+        if: github.event.action == 'deploy-frontend-feature'
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          IMAGE_REPO="${{ github.event.client_payload.repository }}"
+          IMAGE_TAG="${{ github.event.client_payload.tag }}"
+          helm upgrade --install frontend ./k8s/helm/feature/frontend \
+            --namespace feature \
+            --set image.repository="${IMAGE_REPO}" \
+            --set image.tag="${IMAGE_TAG}"

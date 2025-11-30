@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: test
+  namespace: prod
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       cybernotes: backend
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: jimmy7/notes-backend:latest
+          image: ${IMAGE}
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
@@ -23,7 +23,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: "prod"
           - name: DB_URL
-            value: "jdbc:postgresql://192.168.3.16:5433/notesbase"
+            value: "jdbc:postgresql://192.168.3.16:5432/notesbase"
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
@@ -42,7 +42,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
-  namespace: test
+  namespace: prod
 spec:
   selector:
     cybernotes: backend
