@@ -3,8 +3,9 @@ image:
   tag: latest
   pullPolicy: Always
 
-replicaCount: 2
+replicaCount: 1
 
 service:
   port: 80
+
 
