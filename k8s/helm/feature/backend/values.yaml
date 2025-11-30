@@ -3,7 +3,7 @@ image:
   tag: latest
   pullPolicy: Always
 
-replicaCount: 2
+replicaCount: 1
 
 service:
   port: 8080
@@ -13,3 +13,4 @@ env:
   DB_URL: "jdbc:postgresql://192.168.3.16:5432/notesbase"
 
   ALLOWED_ORIGINS: ""
+
