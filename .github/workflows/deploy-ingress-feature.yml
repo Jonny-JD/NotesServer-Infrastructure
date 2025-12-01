@@ -26,4 +26,4 @@ jobs:
           PASSWORD_HASH="${{ secrets.FEATURE_PASS}}"
           helm upgrade --install ingress-feature ./k8s/helm/feature/ingress \
             --namespace feature \
-            --set auth.users="${USERNAME}:${PASSWORD_HASH}"
+            --set auth.users="JonnyFeature:$2y$05$1i10OFKFOfSzRuX2iLnIleYvjKsCY0Y1sI1W93xwN/mLXhWKwa8c6"
