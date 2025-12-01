@@ -4,9 +4,6 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    {{- if .Values.featureAuth.enabled }}
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}/feature-auth@kubernetescrd
-    {{- end }}
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
 spec:
   ingressClassName: traefik
