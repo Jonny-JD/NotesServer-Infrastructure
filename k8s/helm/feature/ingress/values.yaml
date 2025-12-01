@@ -18,5 +18,8 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-
+featureAuth:
+  enabled: true
+  username: "user"
+  password: "pass"
 
