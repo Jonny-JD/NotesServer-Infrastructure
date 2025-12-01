@@ -19,5 +19,6 @@ ingress:
   frontendPort: 80
 
 auth:
-  users: "userы"
+  users: "users"
+
 
