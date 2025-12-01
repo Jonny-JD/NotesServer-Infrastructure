@@ -22,8 +22,8 @@ jobs:
       - name: Deploy ingress
         run: |
           cd "$GITHUB_WORKSPACE"
-          IMAGE_REPO="${{ github.event.client_payload.repository }}"
-          IMAGE_TAG="${{ github.event.client_payload.tag }}"
+          USERNAME="${{ secrets.FEATURE_USER }}"
+          PASSWORD_HASH="${{ secrets.FEATURE_PASS}}"
           helm upgrade --install ingress-feature ./k8s/helm/feature/ingress \
             --namespace feature \
             --set auth.users="${USERNAME}:${PASSWORD_HASH}"
