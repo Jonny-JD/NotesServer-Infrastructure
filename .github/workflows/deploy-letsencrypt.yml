@@ -24,4 +24,4 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          helm upgrade --install ingress ./k8s/helm/prod/cluster-issuer \
+          helm upgrade --install letsencrypt ./k8s/helm/prod/cluster-issuer \
