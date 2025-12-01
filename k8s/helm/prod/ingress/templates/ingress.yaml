@@ -7,12 +7,10 @@ metadata:
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
 spec:
   ingressClassName: traefik
-  {{- if .Values.tls.enabled }}
   tls:
   - hosts:
     - {{ .Values.ingress.host }}
     secretName: {{ .Values.tls.secretName }}
-  {{- end }}
   rules:
   - host: {{ .Values.ingress.host }}
     http:
