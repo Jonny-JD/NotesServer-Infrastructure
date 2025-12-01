@@ -26,3 +26,5 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install ingress-feature ./k8s/helm/feature/ingress \
             --namespace feature \
+            --set auth.username="${{ secrets.FEATURE_AUTH_USERNAME }}" \
+            --set auth.password="${{ secrets.FEATURE_AUTH_PASSWORD }}"

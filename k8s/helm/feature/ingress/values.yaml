@@ -18,5 +18,6 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-
-
+auth:
+  username: "username"
+  password: "pass"   # bcrypt
