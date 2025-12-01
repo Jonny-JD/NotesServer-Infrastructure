@@ -5,9 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
-    traefik.ingress.kubernetes.io/auth-type: basic
-    traefik.ingress.kubernetes.io/auth-secret: basic-auth-secret
-    traefik.ingress.kubernetes.io/auth-realm: "Protected Area"
 spec:
   ingressClassName: traefik
   tls:
