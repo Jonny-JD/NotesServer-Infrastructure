@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.letsencrypt.issuerName }}
 spec:
   acme:
-    email: {{ .Values.letsencrypt.issuerName }}
+    email: {{ .Values.letsencrypt.email }}
     server: {{ .Values.letsencrypt.server }}
     privateKeySecretRef:
       name: {{ .Values.letsencrypt.secretName }}
