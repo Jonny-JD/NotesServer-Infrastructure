@@ -1,25 +1,32 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
+  annotations:
+    cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`{{ .Values.ingress.host }}`) && PathPrefix(`/api`)
-      kind: Rule
-      services:
-        - name: {{ .Values.ingress.backendService }}
-          port: {{ .Values.ingress.backendPort }}
-      middlewares:
-        - name: basic-auth
-    - match: Host(`{{ .Values.ingress.host }}`) && PathPrefix(`/`)
-      kind: Rule
-      services:
-        - name: {{ .Values.ingress.frontendService }}
-          port: {{ .Values.ingress.frontendPort }}
-      middlewares:
-        - name: basic-auth
+  ingressClassName: traefik
   tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
     secretName: {{ .Values.tls.secretName }}
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend: 
+          service:
+            name: {{ .Values.ingress.backendService }}
+            port:
+              number: {{ .Values.ingress.backendPort }}
+
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.ingress.frontendService }}
+            port: 
+              number: {{ .Values.ingress.frontendPort }}
