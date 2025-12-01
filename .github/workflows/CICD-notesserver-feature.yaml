@@ -28,8 +28,8 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install backend-feature ./k8s/helm/feature/backend \
             --namespace feature \
-            --set image.repository="${IMAGE_REPO}" \
-            --set image.tag="${IMAGE_TAG}"
+            --set backend.image.repository="${IMAGE_REPO}" \
+            --set backend.image.tag="${IMAGE_TAG}"
 
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-feature'
@@ -39,5 +39,5 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install frontend-feature ./k8s/helm/feature/frontend \
             --namespace feature \
-            --set image.repository="${IMAGE_REPO}" \
-            --set image.tag="${IMAGE_TAG}"
+            --set frontend.image.repository="${IMAGE_REPO}" \
+            --set frontend.image.tag="${IMAGE_TAG}"
