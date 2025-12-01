@@ -30,11 +30,16 @@ frontend:
 
 
 letsencrypt:
-
+  enabled: true
   issuerName: letsencrypt-feature
   email: jonny.cbrigante@gmail.com
   server: https://acme-v02.api.letsencrypt.org/directory
   secretName: letsencrypt-feature
+
+tls:
+    enabled: true
+    clusterIssuer: letsencrypt-feature
+    secretName: feature-cybernotes-tls
 
 
 ingress:
@@ -47,6 +52,3 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-  tls:
-    clusterIssuer: letsencrypt-feature
-    secretName: feature-cybernotes-tls

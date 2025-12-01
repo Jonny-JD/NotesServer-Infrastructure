@@ -4,13 +4,17 @@ metadata:
   name: {{ .Release.Name }}-ingress
   namespace: {{ .Release.Namespace }}
   annotations:
-    cert-manager.io/cluster-issuer: "{{ .Values.ingress.tls.clusterIssuer }}"
+    {{- if .Values.letsencrypt.enabled }}
+    cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
+    {{- end }}
 spec:
   ingressClassName: traefik
-  tls: 
+  {{- if .Values.tls.enabled }}
+  tls:
   - hosts:
-    - {{ .Values.ingress.host }}
-    secretName: {{ .Values.ingress.tls.secretName }}
+    - {{ .Values.host }}
+    secretName: {{ .Values.tls.secretName }}
+  {{- end }}
   rules:
   - host: {{ .Values.host }}
     http:
