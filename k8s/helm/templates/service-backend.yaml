@@ -7,6 +7,7 @@ spec:
   selector:
     cybernotes: backend
   ports:
-  - port: {{ .Values.service.port }}
+  - port: {{ .Values.backend.service.port }}
     targetPort: 8080
+
   type: ClusterIP
