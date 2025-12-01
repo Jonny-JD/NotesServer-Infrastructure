@@ -5,6 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
+    traefik.ingress.kubernetes.io/whitelist-source-range: "77.239.252.171/32"
 spec:
   ingressClassName: traefik
   tls:
