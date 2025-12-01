@@ -12,5 +12,6 @@ backend:
 
   env:
     SPRING_PROFILES_ACTIVE: "prod"
-    DB_URL: "jdbc:postgresql://192.168.3.16:5432/notesbase"
+    DB_URL: "jdbc:postgresql://192.168.3.16:5433/notesbase-test"
+
     ALLOWED_ORIGINS: ""
