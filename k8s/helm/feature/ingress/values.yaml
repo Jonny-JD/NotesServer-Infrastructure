@@ -18,4 +18,5 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-
+auth:
+  users: "users"
