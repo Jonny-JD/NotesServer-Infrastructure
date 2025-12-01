@@ -30,7 +30,7 @@ frontend:
 
 
 letsencrypt:
-  create: true
+  create: false
   issuerName: letsencrypt-prod
   email: jonny.cbrigante@gmail.com
   server: https://acme-v02.api.letsencrypt.org/directory
@@ -50,4 +50,5 @@ ingress:
 
   frontendService: frontend-service
   frontendPort: 80
+
 
