@@ -1,0 +1,8 @@
+letsencrypt:
+  enable: true
+  issuerName: letsencrypt-prod
+  email: jonny.cbrigante@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  secretName: letsencrypt-prod
+
+
