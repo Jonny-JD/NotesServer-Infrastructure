@@ -20,4 +20,4 @@ ingress:
 
 auth:
   username: "username"
-  password: "pass"   # bcrypt
+  password: "pass"
