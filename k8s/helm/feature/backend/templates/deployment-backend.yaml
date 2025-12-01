@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+  selector:
+    matchLabels:
+      cybernotes: backend
+  template:
+    metadata:
+      labels:
+        cybernotes: backend
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          ports:
+          - containerPort: 8080
+          env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: "{{ .Values.backend.env.SPRING_PROFILES_ACTIVE }}"
+          - name: DB_URL
+            value: "{{ .Values.backend.env.DB_URL }}"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: password  
+          - name: ALLOWED_ORIGINS
+            value: "{{ .Values.backend.env.ALLOWED_ORIGINS }}"

@@ -1,0 +1,22 @@
+letsencrypt:
+  issuerName: letsencrypt-feature
+  email: jonny.cbrigante@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  secretName: letsencrypt-feature
+
+tls:
+  clusterIssuer: letsencrypt-feature
+  secretName: cybernotes-feature-tls
+
+ingress:
+
+  host: feature.cybernotes.space
+
+  backendService: backend-service
+  backendPort: 8080
+
+  frontendService: frontend-service
+  frontendPort: 80
+
+
+
