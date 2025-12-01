@@ -26,5 +26,3 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install ingress ./k8s/helm/prod/ingress \
             --namespace prod \
-            --set backend.image.repository="${IMAGE_REPO}" \
-            --set backend.image.tag="${IMAGE_TAG}"
