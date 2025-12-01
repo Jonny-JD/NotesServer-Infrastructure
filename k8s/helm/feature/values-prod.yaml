@@ -1,0 +1,11 @@
+host: cybernotes.space
+
+backendService: backend-service
+backendPort: 8080
+
+frontendService: frontend-service
+frontendPort: 80
+
+tls:
+  clusterIssuer: letsencrypt-prod
+  secretName: cybernotes-tls

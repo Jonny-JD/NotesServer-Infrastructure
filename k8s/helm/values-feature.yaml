@@ -1,0 +1,52 @@
+backend:
+
+  image:
+    repository: jimmy7/notes-backend
+    tag: latest
+    pullPolicy: Always
+
+  replicaCount: 1
+
+  service:
+    port: 8080
+
+  env:
+    SPRING_PROFILES_ACTIVE: "prod"
+    DB_URL: "jdbc:postgresql://192.168.3.16:5433/notesbase-test"
+    ALLOWED_ORIGINS: ""
+
+
+frontend:
+
+  image:
+    repository: jimmy7/notes-frontend
+    tag: latest
+    pullPolicy: Always
+
+  replicaCount: 1
+
+  service:
+    port: 80
+
+
+letsencrypt:
+
+  issuerName: letsencrypt-feature
+  email: jonny.cbrigante@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  secretName: letsencrypt-feature
+
+
+ingress:
+
+  host: feature.cybernotes.space
+
+  backendService: backend-service
+  backendPort: 8080
+
+  frontendService: frontend-service
+  frontendPort: 80
+
+  tls:
+    clusterIssuer: letsencrypt-feature
+    secretName: feature-cybernotes-tls
