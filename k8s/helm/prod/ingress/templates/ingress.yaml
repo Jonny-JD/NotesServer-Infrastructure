@@ -4,9 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    {{- if .Values.letsencrypt.enabled }}
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
-    {{- end }}
 spec:
   ingressClassName: traefik
   {{- if .Values.tls.enabled }}
