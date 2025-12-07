@@ -8,4 +8,4 @@ spec:
   basicAuth:
     secret: feature-auth-secret
     realm: "Feature Application Access"
-{{-end }}
+{{- end }}

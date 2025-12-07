@@ -24,5 +24,4 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           helm upgrade --install ingress-feature ./k8s/helm/ingress \
             --namespace feature \
-            --values ./k8s/helm/ingress/values_feature.yaml \
-            --set auth.users="${USERNAME}:${PASSWORD_HASH}"
+            --values ./k8s/helm/ingress/values_feature.yaml
