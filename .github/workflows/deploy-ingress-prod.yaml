@@ -24,4 +24,4 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           helm upgrade --install ingress ./k8s/helm/ingress \
             --namespace prod \
-            --values ./k8s/helm/ingress/values-prod.yaml
+            --values ./k8s/helm/ingress/values_prod.yaml
