@@ -23,4 +23,4 @@ jobs:
         run: |
           cd "$GITHUB_WORKSPACE"
           helm upgrade --install letsencrypt ./k8s/helm/cluster-issuer \
-          --values ./k8s/helm/cluster-issuer/values-prod.yaml
+          --values ./k8s/helm/cluster-issuer/values_prod.yaml
