@@ -18,4 +18,4 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-
+  annotations: {}

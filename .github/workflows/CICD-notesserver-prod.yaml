@@ -28,7 +28,7 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
-            --values ./k8s/helm/backend/values-prod.yaml \
+            --values ./k8s/helm/backend/values_prod.yaml \
             --set backend.image.repository="${IMAGE_REPO}" \
             --set backend.image.tag="${IMAGE_TAG}"
 
@@ -40,6 +40,6 @@ jobs:
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
           helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
-            --values ./k8s/helm/backend/values-prod.yaml \
+            --values ./k8s/helm/frontend/values_prod.yaml \
             --set frontend.image.repository="${IMAGE_REPO}" \
             --set frontend.image.tag="${IMAGE_TAG}"
