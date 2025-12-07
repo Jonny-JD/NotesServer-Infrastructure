@@ -1,0 +1,13 @@
+frontend:
+
+  image:
+    repository: jimmy7/notes-frontend
+    tag: latest
+    pullPolicy: Always
+
+  replicaCount: 1
+
+  service:
+    port: 80
+
+

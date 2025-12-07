@@ -1,0 +1,17 @@
+backend:
+
+  image:
+    repository: jimmy7/notes-backend
+    tag: latest
+    pullPolicy: Always
+
+  replicaCount: 1
+
+  service:
+    port: 8080
+
+  env:
+    SPRING_PROFILES_ACTIVE: ""
+    DB_URL: ""
+
+    ALLOWED_ORIGINS: ""

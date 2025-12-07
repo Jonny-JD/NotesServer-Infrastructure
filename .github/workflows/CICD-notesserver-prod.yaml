@@ -26,8 +26,9 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          helm upgrade --install backend ./k8s/helm/prod/backend \
+          helm upgrade --install backend ./k8s/helm/backend \
             --namespace prod \
+            --values ./k8s/helm/backend/values-prod.yaml \
             --set backend.image.repository="${IMAGE_REPO}" \
             --set backend.image.tag="${IMAGE_TAG}"
 
@@ -37,7 +38,8 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          helm upgrade --install frontend ./k8s/helm/prod/frontend \
+          helm upgrade --install frontend ./k8s/helm/frontend \
             --namespace prod \
+            --values ./k8s/helm/backend/values-prod.yaml \
             --set frontend.image.repository="${IMAGE_REPO}" \
             --set frontend.image.tag="${IMAGE_TAG}"

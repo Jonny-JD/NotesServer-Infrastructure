@@ -1,0 +1,21 @@
+letsencrypt:
+  issuerName: letsencrypt-default
+  email: jonny.cbrigante@gmail.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  secretName: letsencrypt-default
+
+tls:
+  clusterIssuer: letsencrypt-default
+  secretName: cybernotes-default-tls
+
+ingress:
+
+  host: default.cybernotes.space
+
+  backendService: backend-service
+  backendPort: 8080
+
+  frontendService: frontend-service
+  frontendPort: 80
+
+
