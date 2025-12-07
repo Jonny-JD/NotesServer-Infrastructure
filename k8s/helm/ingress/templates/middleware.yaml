@@ -1,3 +1,4 @@
+{{- if .Values.middleware.basicAuth.enabled }}
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
@@ -7,3 +8,4 @@ spec:
   basicAuth:
     secret: feature-auth-secret
     realm: "Feature Application Access"
+{{-end }}

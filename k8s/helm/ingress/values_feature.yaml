@@ -19,3 +19,7 @@ ingress:
 
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: "feature-basic-auth@kubernetescrd"
+
+middleware:
+  basicAuth:
+    enabled: true

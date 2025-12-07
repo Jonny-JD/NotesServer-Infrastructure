@@ -17,5 +17,7 @@ ingress:
   frontendService: frontend-service
   frontendPort: 80
 
-
+middleware:
+  basicAuth:
+    enabled: false
 
