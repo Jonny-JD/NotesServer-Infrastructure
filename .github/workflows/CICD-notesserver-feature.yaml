@@ -20,16 +20,18 @@ jobs:
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
-      - name: Deploy backend via Helm
+      - name: Deploy backend
         if: github.event.action == 'deploy-backend-feature'
         run: |
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          helm upgrade --install backend-feature ./k8s/helm/feature/backend \
+          helm upgrade --install backend-feature ./k8s/helm/backend \
             --namespace feature \
+            --values ./k8s/helm/backend/values-feature.yaml \
             --set backend.image.repository="${IMAGE_REPO}" \
             --set backend.image.tag="${IMAGE_TAG}"
+            
 
       - name: Deploy frontend
         if: github.event.action == 'deploy-frontend-feature'
@@ -37,7 +39,8 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           IMAGE_REPO="${{ github.event.client_payload.repository }}"
           IMAGE_TAG="${{ github.event.client_payload.tag }}"
-          helm upgrade --install frontend-feature ./k8s/helm/feature/frontend \
+          helm upgrade --install frontend-feature ./k8s/helm/frontend \
             --namespace feature \
+            --values ./k8s/helm/backend/values-feature.yaml \
             --set frontend.image.repository="${IMAGE_REPO}" \
             --set frontend.image.tag="${IMAGE_TAG}"
