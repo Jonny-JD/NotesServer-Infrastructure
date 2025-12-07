@@ -5,8 +5,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     cert-manager.io/cluster-issuer: "{{ .Values.letsencrypt.issuerName }}"
-    {{- if .Values.ingress.annotations["traefik.ingress.kubernetes.io/router.middlewares"] }}
-    traefik.ingress.kubernetes.io/router.middlewares: {{ .Values.ingress.annotations["traefik.ingress.kubernetes.io/router.middlewares"] | quote }}
+    {{- $middlewareValue := get .Values.ingress.annotations "traefik.ingress.kubernetes.io/router.middlewares" }}
+    {{- if $middlewareValue }}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ $middlewareValue | quote }}
     {{- end }}
 spec:
   ingressClassName: traefik
