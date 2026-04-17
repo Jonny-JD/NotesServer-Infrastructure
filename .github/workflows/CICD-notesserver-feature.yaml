@@ -31,6 +31,7 @@ jobs:
             --values ./k8s/helm/backend/values_feature.yaml \
             --set backend.image.repository="${IMAGE_REPO}" \
             --set backend.image.tag="${IMAGE_TAG}"
+            --set jwtSecret="${{ secrets.JWT_SECRET }}"
             
 
       - name: Deploy frontend
