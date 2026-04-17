@@ -13,4 +13,4 @@ backend:
   env:
     SPRING_PROFILES_ACTIVE: "prod"
     DB_URL: "jdbc:postgresql://192.168.3.16:5433/notesbase-test"
-    ALLOWED_ORIGINS: ""
+    JWT_SECRET: "yrdyQEzosYX1Xedv//K9iHERBWHTv+Q9GBnJ7AoxInY="
