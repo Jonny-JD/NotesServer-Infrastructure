@@ -24,6 +24,8 @@ spec:
             value: "{{ .Values.backend.env.SPRING_PROFILES_ACTIVE }}"
           - name: DB_URL
             value: "{{ .Values.backend.env.DB_URL }}"
+          - name: JWT_SECRET
+            value: "{{ .Values.backend.env.JWT_SECRET }}"
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
