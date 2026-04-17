@@ -25,7 +25,7 @@ spec:
           - name: DB_URL
             value: "{{ .Values.backend.env.DB_URL }}"
           - name: JWT_SECRET
-            value: "{{ .Values.backend.env.JWT_SECRET }}"
+            value: {{ .Values.jwtSecret | quote }}
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
