@@ -13,5 +13,3 @@ backend:
   env:
     SPRING_PROFILES_ACTIVE: ""
     DB_URL: ""
-
-    ALLOWED_ORIGINS: ""
