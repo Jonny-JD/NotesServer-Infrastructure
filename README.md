@@ -92,4 +92,5 @@ Each pipeline covers the full cycle:
 
 ## Related Repositories
 
-- [NotesServer Backend](https://github.com/Jonny-JD/NotesServer) — Java 21, Spring Boot, PostgreSQL
+- [NotesServer Backend](https://github.com/Jonny-JD/NotesServer-B-) — Java 21, Spring Boot, PostgreSQL
+- [NotesServer Frontend](https://github.com/Jonny-JD/NotesServer-F-) - React.js, TS, Vite
