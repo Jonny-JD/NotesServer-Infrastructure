@@ -59,6 +59,7 @@ Each Helm chart has `values_prod.yaml` and `values_feature.yaml` for environment
 
 - [NotesServer Backend](https://github.com/Jonny-JD/NotesServer-B-) — Java 21, Spring Boot, PostgreSQL
 - [NotesServer Frontend](https://github.com/Jonny-JD/NotesServer-F-) — React, TypeScript, Vite
+- [NotesServer Autotests](https://github.com/Jonny-JD/NotestServer-Test-) — Selenide, JUnit 5, Allure, Kubernetes, Selenium Grid
 
 ## About
 
